@@ -1,12 +1,18 @@
-import React from "react";
-import Jumbotron from "./components/jumbotron";
-import jumboData from "./fixtures/jumbo.json";
-
+import React from 'react';
+import Jumbotron from './components/jumbotron';
+import jumboData from './fixtures/jumbo.json';
+interface jumboType {
+  id: number;
+  title: string;
+  subTitle: string;
+  image: string;
+  alt: string;
+  direction: string;
+}
 function App() {
-  const dummy = '';
   return (
     <Jumbotron.Container>
-      {jumboData.map((item: any) => (
+      {jumboData.map((item: jumboType) => (
         <Jumbotron key={item.id} direction={item.direction}>
           <Jumbotron.Pane>
             <Jumbotron.Title>{item.title}</Jumbotron.Title>
