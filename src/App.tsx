@@ -3,6 +3,7 @@ import Jumbotron from "./components/jumbotron";
 import jumboData from "./fixtures/jumbo.json";
 
 function App() {
+  const dummy = '';
   return (
     <Jumbotron.Container>
       {jumboData.map((item: any) => (
