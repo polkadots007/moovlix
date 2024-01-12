@@ -1,4 +1,5 @@
-import styled from "styled-components";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import styled from 'styled-components';
 
 export const Item = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ export const Item = styled.div`
 `;
 export const Inner = styled.div`
   display: flex;
-  flex-direction: ${({ direction }) => direction};
+  flex-direction: ${({ direction }: any) => direction};
   align-items: center;
   justify-content: space-between;
   max-width: 1100px;
