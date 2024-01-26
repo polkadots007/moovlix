@@ -4,39 +4,74 @@ import {
   Inner,
   Container,
   Pane,
+  ImagePane,
   Title,
   SubTitle,
   Image,
-} from './styles/jumbotron';
+} from './styles/Jumbotron';
 
-export default function Jumbotron({ children, direction = 'row' }) {
+interface elementType {
+  children: React.ReactNode;
+  [key: string]: unknown;
+}
+interface itemType {
+  [key: string]: unknown;
+}
+
+export default function Jumbotron({
+  children,
+  direction = 'row',
+  ...restProps
+}: elementType) {
   return (
-    <Item direction={direction}>
-      <Inner>{children}</Inner>
+    <Item {...restProps}>
+      <Inner direction={direction as string}>{children}</Inner>
     </Item>
   );
 }
 
-Jumbotron.Container = function JumbotronContainer({ children, ...restProps }) {
+Jumbotron.Container = function JumbotronContainer({
+  children,
+  ...restProps
+}: elementType) {
   return <Container {...restProps}>{children}</Container>;
 };
 
-Jumbotron.Pane = function JumbotronPane({ children, ...restProps }) {
+Jumbotron.Pane = function JumbotronPane({
+  children,
+  ...restProps
+}: elementType) {
   return <Pane {...restProps}>{children}</Pane>;
 };
 
-Jumbotron.Title = function JumbotronTitle({ children, ...restProps }) {
+Jumbotron.ImagePane = function JumbotronImagePane({
+  children,
+  ...restProps
+}: elementType) {
+  return <ImagePane {...restProps}>{children}</ImagePane>;
+};
+
+Jumbotron.Title = function JumbotronTitle({
+  children,
+  ...restProps
+}: elementType) {
   return <Title {...restProps}>{children}</Title>;
 };
 
-Jumbotron.Title = function JumbotronTitle({ children, ...restProps }) {
+Jumbotron.Title = function JumbotronTitle({
+  children,
+  ...restProps
+}: elementType) {
   return <Title {...restProps}>{children}</Title>;
 };
 
-Jumbotron.SubTitle = function JumbotronSubTitle({ children, ...restProps }) {
+Jumbotron.SubTitle = function JumbotronSubTitle({
+  children,
+  ...restProps
+}: elementType) {
   return <SubTitle {...restProps}>{children}</SubTitle>;
 };
 
-Jumbotron.Image = function JumbotronImage({ ...restProps }) {
+Jumbotron.Image = function JumbotronImage({ ...restProps }: itemType) {
   return <Image {...restProps} />;
 };
