@@ -30,6 +30,8 @@ export const Frame = styled.div`
 export const Item = styled.div`
   color: white;
   margin-bottom: 10px;
+  margin: auto;
+  width: 100%;
 
   &:first-of-type {
     margin-top: 3em;
@@ -57,7 +59,7 @@ export const Header = styled.div`
   }
 
   @media (max-width: 600px) {
-    width: 16px;
+    width: 90%;
   }
 `;
 export const Body = styled.div`
@@ -74,5 +76,7 @@ export const Body = styled.div`
   @media (max-width: 600px) {
     font-size: 16px;
     line-height: 22px;
+    width: 90%;
+    padding: 0.8em 2.2em 0.8em 1.4em;
   }
 `;
