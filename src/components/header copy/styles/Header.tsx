@@ -5,10 +5,6 @@ interface backgroundProps {
   src: string;
 }
 
-interface clearBgProps {
-  toggletheme: boolean;
-}
-
 export const Background = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,13 +30,6 @@ export const Background = styled.div`
       }
   }
 `;
-export const ClearBackground = styled.div<clearBgProps>`
-  display: flex;
-  flex-direction: column;
-  background-color: ${({ toggletheme }: clearBgProps) =>
-    toggletheme ? '#fff' : '#000'};
-  }
-`;
 export const Container = styled.div`
   display: flex;
   margin: 0 30px;
@@ -48,17 +37,16 @@ export const Container = styled.div`
   padding: 18px 0;
   justify-content: space-between;
   align-items: center;
+
   a {
     display: flex;
   }
-  border-bottom: ${({ toggletheme }: clearBgProps) =>
-    toggletheme ? '1px solid #e6e6e6' : 'none'};
 
   @media (max-width: 1000px) {
     margin: 0 25px;
   }
 `;
-
+export const Frame = styled.div``;
 export const Logo = styled.img`
   height: 58px;
   width: 138px;
@@ -71,15 +59,12 @@ export const Logo = styled.img`
   }
 `;
 
-export const ButtonLink = styled(Link)<clearBgProps>`
+export const ButtonLink = styled(Link)`
   display: block;
-  background-color: ${({ toggletheme }: clearBgProps) =>
-    !toggletheme ? '#e50914' : '#fff'};
+  background-color: #e50914;
   width: 84px;
   height: fit-content;
-  color: ${({ toggletheme }: clearBgProps) => (toggletheme ? '#333' : '#fff')};
-  font-weight: ${({ toggletheme }: clearBgProps) => (toggletheme ? 600 : 400)};
-  scale: ${({ toggletheme }: clearBgProps) => (toggletheme ? 1.2 : 1)};
+  color: white;
   border: 0;
   font-size: 15px;
   border-radius: 3px;
@@ -90,9 +75,6 @@ export const ButtonLink = styled(Link)<clearBgProps>`
   z-index: 2;
 
   &:hover {
-    background-color: ${({ toggletheme }: clearBgProps) =>
-      toggletheme ? '#fff' : '#f40612'};
-    text-decoration: ${({ toggletheme }: clearBgProps) =>
-      toggletheme ? 'underline' : 'none'};
+    background-color: #f40612;
   }
 `;

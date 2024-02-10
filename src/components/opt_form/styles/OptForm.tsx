@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface errorProps {
+  error: string;
+}
+
 export const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -33,7 +37,7 @@ export const Button = styled.button`
   @media (max-width: 1000px) {
     height: 50px;
     font-size: 16px;
-    margin-top: 20px;
+    margin-top: 40px;
     font-weight: bold;
   }
 
@@ -48,9 +52,8 @@ export const Button = styled.button`
   }
 `;
 export const Input = styled.input`
-  max-width: 350px;
-  width: 100%;
-  border: 0.05px solid #ffffffb3;
+  border: ${({ error }: errorProps) =>
+    error ? '0.05px solid #e50914' : '0.05px solid #ffffffb3'};
   padding: 10px;
   height: 60px;
   box-sizing: border-box;
@@ -72,4 +75,34 @@ export const Text = styled.p`
 export const Break = styled.div`
   flex-basis: 100%;
   height: 0;
+`;
+
+export const Error = styled.div`
+  text-align: left;
+  font-weight: 600;
+  color: #e50914;
+  font-size: 14px;
+  width: -moz-fit-content; /* Firefox */
+  width: -webkit-fit-content; /* Safari */
+  width: fit-content; /* Standard */
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 65px;
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  width: 100%;
+  position: relative;
+`;
+
+export const IconSmall = styled.div`
+  width: 20px;
+  height: 20px;
+  padding-right: 5px;
 `;
