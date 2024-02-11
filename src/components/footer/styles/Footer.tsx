@@ -3,7 +3,7 @@ interface clearBgProps {
   toggletheme: boolean;
 }
 
-export const Container = styled.div`
+export const Container = styled.div<clearBgProps>`
   display: flex;
   padding: 70px 56px;
   justify-content: center;
@@ -28,21 +28,23 @@ export const Column = styled.div`
   flex-direction: column;
   text-align: left;
 `;
-export const Link = styled.a`
+export const Link = styled.a<clearBgProps>`
   color: ${({ toggletheme }: clearBgProps) =>
     toggletheme ? '#737373' : '#ffffffb3'};
   margin-bottom: 20px;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  font-stretch: 100%;
   text-decoration: underline;
 `;
-export const Title = styled.p`
+export const Title = styled.p<clearBgProps>`
   font-size: 16px;
   color: ${({ toggletheme }: clearBgProps) =>
     toggletheme ? '#737373' : '#ffffffb3'};
   margin-bottom: 40px;
 `;
-export const Text = styled.p`
-  font-size: 16px;
+export const Text = styled.p<clearBgProps>`
+  font-size: 14px;
   color: ${({ toggletheme }: clearBgProps) =>
     toggletheme ? '#737373' : '#ffffffb3'};
   margin-bottom: 40px;

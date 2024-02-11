@@ -7,6 +7,17 @@
 // import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 // import { HeaderContainer } from '../containers/Header';
 
+import { RegistrationContainer } from '../containers/ContentSignUp';
+import { FooterContainer } from '../containers/Footer';
+import { HeaderContainer } from '../containers/Header';
+
 export default function Registration() {
-  return <></>;
+  return (
+    <>
+      <HeaderContainer bg={false} toggletheme={true}>
+        <RegistrationContainer />
+      </HeaderContainer>
+      <FooterContainer toggletheme={true} />
+    </>
+  );
 }

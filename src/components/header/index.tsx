@@ -7,13 +7,15 @@ import {
   ButtonLink,
 } from './styles/Header';
 
-interface propsWithToggle {
+interface propsWithLinkToggle {
+  to: string;
   toggletheme: boolean;
   children: React.ReactNode;
   [key: string]: unknown;
 }
 
 interface propsFrame {
+  toggletheme: boolean;
   children: React.ReactNode;
   [key: string]: unknown;
 }
@@ -59,12 +61,13 @@ Header.Frame = function HeaderFrame({
 };
 
 Header.Button = function HeaderButton({
+  to,
   toggletheme = false,
   children,
   ...restProps
-}: propsWithToggle) {
+}: propsWithLinkToggle) {
   return (
-    <ButtonLink toggletheme={toggletheme} {...restProps}>
+    <ButtonLink to={to} toggletheme={toggletheme} {...restProps}>
       {children}
     </ButtonLink>
   );

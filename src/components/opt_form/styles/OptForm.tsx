@@ -51,7 +51,7 @@ export const Button = styled.button`
     }
   }
 `;
-export const Input = styled.input`
+export const Input = styled.input<errorProps>`
   border: ${({ error }: errorProps) =>
     error ? '0.05px solid #e50914' : '0.05px solid #ffffffb3'};
   padding: 10px;

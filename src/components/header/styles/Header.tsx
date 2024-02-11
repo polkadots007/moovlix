@@ -9,7 +9,7 @@ interface clearBgProps {
   toggletheme: boolean;
 }
 
-export const Background = styled.div`
+export const Background = styled.div<backgroundProps>`
   display: flex;
   flex-direction: column;
   background: url(${({ src }: backgroundProps) =>
@@ -41,7 +41,7 @@ export const ClearBackground = styled.div<clearBgProps>`
     toggletheme ? '#fff' : '#000'};
   }
 `;
-export const Container = styled.div`
+export const Container = styled.div<clearBgProps>`
   display: flex;
   margin: 0 30px;
   height: 64px;
