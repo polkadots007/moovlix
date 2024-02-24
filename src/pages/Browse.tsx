@@ -1,3 +1,4 @@
 export default function Browse() {
-  return <></>;
+  // console.log('Browser');
+  return <div>Browse</div>;
 }

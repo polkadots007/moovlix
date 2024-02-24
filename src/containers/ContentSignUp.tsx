@@ -1,14 +1,34 @@
 import { StepContent } from '../components';
 import stepData from '../fixtures/reg_steps.json';
 import * as ROUTES from '../constants/Routes';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { setPersistence, browserSessionPersistence } from 'firebase/auth';
+import { UserContext } from '../context/newuser';
+import { UserProps } from '../types';
+// import { Error } from 'ts-error';
 interface stepProps {
   id: number;
   title: string;
   image?: string;
   alt?: string;
   description: string;
+  action?: {
+    text1: string;
+    text2: string;
+  };
+}
+
+interface usercreds {
+  email: string;
+  password: string;
 }
 interface onChangeProps {
   target: {
@@ -62,8 +82,10 @@ const checkCredentials = (
 };
 
 export function RegistrationContainer() {
+  const auth = getAuth();
   const navigate = useNavigate();
-  const [emailAddress, setEmailAddress] = useState<string>('');
+  const { userDetails, setUserDetails } = useContext(UserContext)!;
+  const [email, setEmail] = useState<string>(userDetails.email || '');
   const [error, setError] = useState<errorProps>({
     input: '',
     pwd: '',
@@ -73,20 +95,54 @@ export function RegistrationContainer() {
   useEffect(() => {
     const regexInput = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
     const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    emailAddress !== '' &&
+    email !== '' &&
       setError((prev: errorProps) => ({ input: '', pwd: prev.pwd }));
-    regexInput.test(emailAddress) &&
+    regexInput.test(email) &&
       setError((prev: errorProps) => ({ input: '', pwd: prev.pwd }));
     password !== '' &&
-      setError((prev: errorProps) => ({ input: prev.pwd, pwd: '' }));
+      setError((prev: errorProps) => ({ input: prev.input, pwd: '' }));
     regexPassword.test(password) &&
-      setError((prev: errorProps) => ({ input: prev.pwd, pwd: '' }));
-  }, [emailAddress, password]);
-
-  const handleSignUpOrRecreate = () => {
-    if (checkCredentials(emailAddress, password, setError)) {
-      navigate(ROUTES.SIGN_UP);
-      setError({});
+      setError((prev: errorProps) => ({ input: prev.input, pwd: '' }));
+  }, [email, password]);
+  const signUpWithEmailAndPassword = async ({ email, password }: usercreds) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const user = userCredential.user;
+      setPersistence(auth, browserSessionPersistence);
+      setUserDetails((prev: UserProps) => {
+        prev.email = email;
+        prev.uid = user?.uid;
+        return prev;
+      });
+      const userInfo = {
+        email: user.email,
+        uid: user.uid,
+      };
+      localStorage.setItem('authUser', JSON.stringify(userInfo));
+      // console.log('User signed up:', user, userCredential);
+      return user;
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error signing up:', error.message);
+        throw error;
+      }
+    }
+  };
+  const handleSignUpOrRecreate = async () => {
+    if (checkCredentials(email, password, setError)) {
+      const user = await signUpWithEmailAndPassword({
+        email: email,
+        password: password,
+      });
+      if (user) {
+        //perform email verification
+        navigate(ROUTES.VERIFY);
+        setError({});
+      }
     }
   };
 
@@ -95,7 +151,7 @@ export function RegistrationContainer() {
       {stepData.map(
         (step: stepProps) =>
           step.id == 2 && (
-            <StepContent.LFrame key={step.id}>
+            <StepContent.LFrame align="left" key={step.id}>
               <StepContent.SmallText>
                 STEP <b>1</b> OF <b>3</b>
               </StepContent.SmallText>
@@ -106,10 +162,8 @@ export function RegistrationContainer() {
               <StepContent.Input
                 error={error?.input}
                 placeholder="Email address"
-                value={emailAddress}
-                onChange={({ target }: onChangeProps) =>
-                  setEmailAddress(target.value)
-                }
+                value={email}
+                onChange={({ target }: onChangeProps) => setEmail(target.value)}
               />
               <StepContent.Password
                 error={error?.pwd}

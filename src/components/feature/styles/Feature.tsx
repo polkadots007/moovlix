@@ -29,3 +29,16 @@ export const SubTitle = styled.h2`
     font-size: 18px;
   }
 `;
+
+export const Text = styled.p`
+  font-size: 19.2px;
+  color: white;
+  text-align: center;
+  z-index: 2;
+  margin-bottom: 0;
+
+  @media (max-width: 600px) {
+    font-size: 16px;
+    line-height: 22px;
+  }
+`;

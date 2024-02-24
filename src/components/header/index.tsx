@@ -9,20 +9,21 @@ import {
 
 interface propsWithLinkToggle {
   to: string;
-  toggletheme: boolean;
+  toggled: boolean;
+  logged: boolean;
   children: React.ReactNode;
   [key: string]: unknown;
 }
 
 interface propsFrame {
-  toggletheme: boolean;
+  toggled: boolean;
   children: React.ReactNode;
   [key: string]: unknown;
 }
 interface propsHeader {
   bg: boolean;
   src: string;
-  toggletheme: boolean;
+  toggled: boolean;
   children: React.ReactNode;
   [key: string]: unknown;
 }
@@ -35,7 +36,7 @@ interface propsLogo {
 export default function Header({
   bg = true,
   src = '',
-  toggletheme = false,
+  toggled = false,
   children,
   ...restProps
 }: propsHeader) {
@@ -44,17 +45,17 @@ export default function Header({
       {children}
     </Background>
   ) : (
-    <ClearBackground toggletheme={toggletheme}>{children}</ClearBackground>
+    <ClearBackground toggled={toggled}>{children}</ClearBackground>
   );
 }
 
 Header.Frame = function HeaderFrame({
-  toggletheme = false,
+  toggled = false,
   children,
   ...restProps
 }: propsFrame) {
   return (
-    <Container toggletheme={toggletheme} {...restProps}>
+    <Container toggled={toggled} {...restProps}>
       {children}{' '}
     </Container>
   );
@@ -62,12 +63,13 @@ Header.Frame = function HeaderFrame({
 
 Header.Button = function HeaderButton({
   to,
-  toggletheme = false,
+  toggled = false,
+  logged = false,
   children,
   ...restProps
 }: propsWithLinkToggle) {
   return (
-    <ButtonLink to={to} toggletheme={toggletheme} {...restProps}>
+    <ButtonLink to={to} toggled={toggled} logged={logged} {...restProps}>
       {children}
     </ButtonLink>
   );

@@ -43,7 +43,7 @@ export default function SignIn() {
 
   return (
     <>
-      <HeaderContainer bg={true} toggletheme={false}>
+      <HeaderContainer srcImg="home-bg-new" bg={true} toggled={false}>
         <Form>
           <Form.Title>Sign In</Form.Title>
           {error && <Form.Error>{error}</Form.Error>}
@@ -90,7 +90,7 @@ export default function SignIn() {
           </Form.SmallText>
         </Form>
       </HeaderContainer>
-      <FooterContainer toggletheme={false} />s
+      <FooterContainer toggled={false} />
     </>
   );
 }

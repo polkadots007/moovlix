@@ -1,4 +1,4 @@
-import { Container, Title, SubTitle } from './styles/Feature';
+import { Container, Title, SubTitle, Text } from './styles/Feature';
 interface propsEle {
   children: React.ReactNode;
   [key: string]: unknown;
@@ -17,4 +17,8 @@ Feature.SubTitle = function FeatureSubTitle({
   ...restProps
 }: propsEle) {
   return <SubTitle {...restProps}>{children} </SubTitle>;
+};
+
+Feature.Text = function FeatureText({ children, ...restProps }: propsEle) {
+  return <Text {...restProps}>{children} </Text>;
 };

@@ -18,5 +18,4 @@ const firebase = initializeApp(config);
 
 //One-Time Call only!!!
 // seedDatabase(firebase);
-
 export { firebase };

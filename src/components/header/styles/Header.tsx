@@ -6,7 +6,12 @@ interface backgroundProps {
 }
 
 interface clearBgProps {
-  toggletheme: boolean;
+  toggled: boolean;
+}
+
+interface clearBgBtnProps {
+  toggled: boolean;
+  logged: boolean;
 }
 
 export const Background = styled.div<backgroundProps>`
@@ -37,8 +42,8 @@ export const Background = styled.div<backgroundProps>`
 export const ClearBackground = styled.div<clearBgProps>`
   display: flex;
   flex-direction: column;
-  background-color: ${({ toggletheme }: clearBgProps) =>
-    toggletheme ? '#fff' : '#000'};
+  background-color: ${({ toggled }: clearBgProps) =>
+    toggled ? '#fff' : '#000'};
   }
 `;
 export const Container = styled.div<clearBgProps>`
@@ -51,8 +56,8 @@ export const Container = styled.div<clearBgProps>`
   a {
     display: flex;
   }
-  border-bottom: ${({ toggletheme }: clearBgProps) =>
-    toggletheme ? '1px solid #e6e6e6' : 'none'};
+  border-bottom: ${({ toggled }: clearBgProps) =>
+    toggled ? '1px solid #e6e6e6' : 'none'};
 
   @media (max-width: 1000px) {
     margin: 0 25px;
@@ -71,15 +76,15 @@ export const Logo = styled.img`
   }
 `;
 
-export const ButtonLink = styled(Link)<clearBgProps>`
+export const ButtonLink = styled(Link)<clearBgBtnProps>`
   display: block;
-  background-color: ${({ toggletheme }: clearBgProps) =>
-    !toggletheme ? '#e50914' : '#fff'};
-  width: 84px;
+  background-color: ${({ toggled }: clearBgBtnProps) =>
+    !toggled ? '#e50914' : '#fff'};
+  width: ${({ logged }: clearBgBtnProps) => (logged ? '100px' : '84px')};
   height: fit-content;
-  color: ${({ toggletheme }: clearBgProps) => (toggletheme ? '#333' : '#fff')};
-  font-weight: ${({ toggletheme }: clearBgProps) => (toggletheme ? 600 : 400)};
-  scale: ${({ toggletheme }: clearBgProps) => (toggletheme ? 1.2 : 1)};
+  color: ${({ toggled }: clearBgBtnProps) => (toggled ? '#333' : '#fff')};
+  font-weight: ${({ toggled }: clearBgBtnProps) => (toggled ? 600 : 400)};
+  scale: ${({ toggled }: clearBgBtnProps) => (toggled ? 1.2 : 1)};
   border: 0;
   font-size: 15px;
   border-radius: 3px;
@@ -90,9 +95,9 @@ export const ButtonLink = styled(Link)<clearBgProps>`
   z-index: 2;
 
   &:hover {
-    background-color: ${({ toggletheme }: clearBgProps) =>
-      toggletheme ? '#fff' : '#f40612'};
-    text-decoration: ${({ toggletheme }: clearBgProps) =>
-      toggletheme ? 'underline' : 'none'};
+    background-color: ${({ toggled }: clearBgBtnProps) =>
+      toggled ? '#fff' : '#f40612'};
+    text-decoration: ${({ toggled }: clearBgBtnProps) =>
+      toggled ? 'underline' : 'none'};
   }
 `;

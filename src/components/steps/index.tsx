@@ -1,4 +1,4 @@
-import { CrossIcon } from '../../helpers/Icons';
+import { CrossIcon, VerifyIcon } from '../../helpers/Icons';
 import {
   Container,
   Frame,
@@ -6,6 +6,7 @@ import {
   Title,
   Text,
   SmallText,
+  MediumText,
   ButtonLink,
   Image,
   InputContainer,
@@ -13,6 +14,7 @@ import {
   Error,
   IconSmall,
   Button,
+  IconFrame,
 } from './styles/Steps';
 
 interface contentProps {
@@ -20,6 +22,11 @@ interface contentProps {
   [key: string]: unknown;
 }
 
+interface contentFrameProps {
+  align: string;
+  children: React.ReactNode;
+  [key: string]: unknown;
+}
 interface propsInputType {
   error?: string;
   [key: string]: unknown;
@@ -32,6 +39,7 @@ interface contentTextProps {
 }
 interface contentLinkProps {
   to: string;
+  type: string;
   children: React.ReactNode;
   [key: string]: unknown;
 }
@@ -49,10 +57,15 @@ Content.Frame = function ContentFrame({
 };
 
 Content.LFrame = function ContentLFrame({
+  align = 'left',
   children,
   ...restProps
-}: contentProps) {
-  return <LFrame {...restProps}>{children}</LFrame>;
+}: contentFrameProps) {
+  return (
+    <LFrame align={align} {...restProps}>
+      {children}
+    </LFrame>
+  );
 };
 
 Content.Image = function ContentImage({ ...restProps }: defaultProps) {
@@ -83,6 +96,13 @@ Content.SmallText = function ContentSmallText({
   ...restProps
 }: contentProps) {
   return <SmallText {...restProps}>{children}</SmallText>;
+};
+
+Content.MediumText = function ContentMediumText({
+  children,
+  ...restProps
+}: contentProps) {
+  return <MediumText {...restProps}>{children}</MediumText>;
 };
 
 Content.Input = function ContentInput({ error, ...restProps }: propsInputType) {
@@ -144,12 +164,23 @@ Content.SubmitButton = function ContentSubmitButton({
 
 Content.Button = function ContentButton({
   to,
+  type = 'normal',
   children,
   ...restProps
 }: contentLinkProps) {
   return (
-    <ButtonLink to={to} {...restProps}>
+    <ButtonLink type={type} to={to} {...restProps}>
       {children}
     </ButtonLink>
+  );
+};
+
+Content.IconNormal = function ContentNormalIcon({
+  ...restProps
+}: defaultProps) {
+  return (
+    <IconFrame {...restProps}>
+      <VerifyIcon />
+    </IconFrame>
   );
 };

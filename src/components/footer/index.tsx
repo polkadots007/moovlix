@@ -9,7 +9,7 @@ import {
 } from './styles/Footer';
 
 interface propsFooterType {
-  toggletheme: boolean;
+  toggled: boolean;
   children: React.ReactNode;
   [key: string]: unknown;
 }
@@ -20,7 +20,7 @@ interface propsType {
 }
 
 interface propsTypewithToggle {
-  toggletheme: boolean;
+  toggled: boolean;
   children: React.ReactNode;
   [key: string]: unknown;
 }
@@ -30,12 +30,12 @@ interface propsBreakType {
 }
 
 export default function Footer({
-  toggletheme = false,
+  toggled = false,
   children,
   ...restProps
 }: propsFooterType) {
   return (
-    <Container toggletheme={toggletheme} {...restProps}>
+    <Container toggled={toggled} {...restProps}>
       {children}
     </Container>
   );
@@ -50,36 +50,36 @@ Footer.Column = function FooterColumn({ children, ...restProps }: propsType) {
 };
 
 Footer.Link = function FooterLink({
-  toggletheme = false,
+  toggled = false,
   children,
   ...restProps
 }: propsTypewithToggle) {
   return (
-    <Link toggletheme={toggletheme} {...restProps}>
+    <Link toggled={toggled} {...restProps}>
       {children}
     </Link>
   );
 };
 
 Footer.Title = function FooterTitle({
-  toggletheme = false,
+  toggled = false,
   children,
   ...restProps
 }: propsTypewithToggle) {
   return (
-    <Title toggletheme={toggletheme} {...restProps}>
+    <Title toggled={toggled} {...restProps}>
       {children}
     </Title>
   );
 };
 
 Footer.Text = function FooterText({
-  toggletheme = false,
+  toggled = false,
   children,
   ...restProps
 }: propsTypewithToggle) {
   return (
-    <Text toggletheme={toggletheme} {...restProps}>
+    <Text toggled={toggled} {...restProps}>
       {children}
     </Text>
   );

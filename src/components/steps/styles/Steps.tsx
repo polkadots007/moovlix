@@ -5,6 +5,10 @@ interface alignProps {
   align: string;
 }
 
+interface linkProps {
+  type: string;
+}
+
 interface errorProps {
   error: string;
 }
@@ -22,12 +26,14 @@ export const Frame = styled.div`
   text-align: center;
   margin: 0 auto 140px;
 `;
-export const LFrame = styled.div`
+export const LFrame = styled.div<alignProps>`
   display: flex;
   max-width: 440px;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: ${({ align }: alignProps) =>
+    align == 'left' ? 'flex-start' : 'center'};
+  justify-content: ${({ align }: alignProps) =>
+    align == 'left' ? 'flex-start' : 'center'};
   margin: 0 auto 140px;
 `;
 export const Title = styled.h1`
@@ -46,17 +52,24 @@ export const SmallText = styled.p`
   padding: 0 10px;
   font-size: 14px;
 `;
+
+export const MediumText = styled.p`
+  padding: 0 10px;
+  font-size: 16px;
+`;
 export const Image = styled.img`
   width: 260px;
   height: 90px;
   margin: 100px 0 20px;
 `;
-export const ButtonLink = styled(Link)`
+export const ButtonLink = styled(Link)<linkProps>`
   display: block;
-  background-color: #e50914;
+  background-color: ${({ type }: linkProps) =>
+    type === 'normal' ? '#e50914' : '#d3d3d3'};
   width: 100%;
   height: fit-content;
-  color: white;
+  color: ${({ type }: linkProps) => (type === 'normal' ? 'white' : 'black')};
+  font-weight: ${({ type }: linkProps) => (type === 'normal' ? 400 : 600)};
   border: 0;
   font-size: 25px;
   border-radius: 3px;
@@ -68,7 +81,8 @@ export const ButtonLink = styled(Link)`
   text-align: center;
 
   &:hover {
-    background-color: #f40612;
+    background-color: ${({ type }: linkProps) =>
+      type === 'normal' ? '#f40612' : '#e0e0e0'};
   }
 `;
 
@@ -131,4 +145,15 @@ export const IconSmall = styled.div`
   width: 20px;
   height: 20px;
   padding-right: 5px;
+`;
+
+export const IconFrame = styled.div`
+  width: 40px;
+  height: 40px;
+  margin-top: 100px;
+  border: 2px solid red;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

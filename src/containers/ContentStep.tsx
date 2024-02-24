@@ -7,6 +7,10 @@ interface stepProps {
   image?: string;
   alt?: string;
   description: string;
+  action?: {
+    text1: string;
+    text2: string;
+  };
 }
 export function StepContainer() {
   return (
@@ -23,7 +27,7 @@ export function StepContainer() {
               <StepContent.Text align="center">
                 {step.description}
               </StepContent.Text>
-              <StepContent.Button to={ROUTES.REGISTRATION}>
+              <StepContent.Button type={'normal'} to={ROUTES.REGISTRATION}>
                 Next
               </StepContent.Button>
             </StepContent.Frame>
