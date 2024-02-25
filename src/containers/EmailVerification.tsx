@@ -3,6 +3,7 @@ import stepData from '../fixtures/reg_steps.json';
 import * as ROUTES from '../constants/Routes';
 import { UserContext } from '../context/newuser';
 import { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 interface stepProps {
   id: number;
   title: string;
@@ -16,6 +17,8 @@ interface stepProps {
 }
 export function VerifyContainer() {
   const { userDetails } = useContext(UserContext)!;
+  const location = useLocation();
+  const state = location.state;
 
   return (
     <StepContent>
@@ -35,7 +38,11 @@ export function VerifyContainer() {
               <StepContent.MediumText align="center">
                 {step.description}
               </StepContent.MediumText>
-              <StepContent.Button type={'other'} to={ROUTES.HOME}>
+              <StepContent.Button
+                type={'other'}
+                to={ROUTES.BROWSER}
+                state={{ user: state }}
+              >
                 Skip
               </StepContent.Button>
             </StepContent.LFrame>

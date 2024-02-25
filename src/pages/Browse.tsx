@@ -1,4 +1,20 @@
+import { useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { UserProps } from '../types';
+import { UserContext } from '../context/newuser';
+
 export default function Browse() {
-  // console.log('Browser');
+  const { setUserDetails } = useContext(UserContext)!;
+  const location = useLocation();
+  const state = location.state;
+
+  useEffect(() => {
+    localStorage.setItem('authUser', JSON.stringify(state?.user));
+    setUserDetails((prev: UserProps) => {
+      prev.email = state.user?.email;
+      prev.uid = state.user?.uid;
+      return prev;
+    });
+  }, []);
   return <div>Browse</div>;
 }
