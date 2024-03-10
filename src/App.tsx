@@ -15,6 +15,7 @@ import { Suspense, useState } from 'react';
 import { UserProps } from './types';
 import { useAuthListener } from './hooks';
 import { IsUserLoggedIn, ProtectedRoute } from './helpers/Routes';
+import RecoverPassword from './pages/Recover';
 
 function App() {
   const { user } = useAuthListener();
@@ -48,14 +49,14 @@ function App() {
               }
             ></Route>
             <Route
-              path={ROUTES.SIGN_IN}
+              path={ROUTES.RECOVER_PW}
               element={
                 <IsUserLoggedIn
                   user={user}
                   loggedInPath={ROUTES.BROWSER}
-                  path={ROUTES.SIGN_IN}
+                  path={ROUTES.RECOVER_PW}
                 >
-                  <SignIn />
+                  <RecoverPassword />
                 </IsUserLoggedIn>
               }
             ></Route>
@@ -93,6 +94,18 @@ function App() {
                   path={ROUTES.VERIFY}
                 >
                   <VerifyEmail />
+                </IsUserLoggedIn>
+              }
+            ></Route>
+            <Route
+              path={ROUTES.SIGN_IN}
+              element={
+                <IsUserLoggedIn
+                  user={user}
+                  loggedInPath={ROUTES.BROWSER}
+                  path={ROUTES.SIGN_IN}
+                >
+                  <SignIn />
                 </IsUserLoggedIn>
               }
             ></Route>

@@ -2,8 +2,9 @@ import { StepContent } from '../components';
 import stepData from '../fixtures/reg_steps.json';
 import * as ROUTES from '../constants/Routes';
 import { UserContext } from '../context/newuser';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { getAuth, sendEmailVerification } from 'firebase/auth';
 interface stepProps {
   id: number;
   title: string;
@@ -19,7 +20,25 @@ export function VerifyContainer() {
   const { userDetails } = useContext(UserContext)!;
   const location = useLocation();
   const state = location.state;
+  const verifyingMail = () => {
+    const auth = getAuth();
 
+    sendEmailVerification(auth?.currentUser)
+      .then(() => {
+        // Email verification sent!
+        // ...
+        console.log('Verification Mail sent');
+      })
+      .catch((error: { code: number; message: string }) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(errorCode + ':' + errorMessage);
+        // Handle error
+      });
+  };
+  useEffect(() => {
+    verifyingMail();
+  }, []);
   return (
     <StepContent>
       {stepData.map(

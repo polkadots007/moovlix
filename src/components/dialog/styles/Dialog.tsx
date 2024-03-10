@@ -1,5 +1,12 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+
+interface infoProps {
+  error: string;
+}
+interface LinkProps {
+  extra: boolean;
+}
 
 export const Container = styled.div`
   display: flex;
@@ -22,6 +29,11 @@ export const Frame = styled.div`
   width: 350px;
   z-index: 2;
 `;
+export const BoxFrame = styled.div`
+  line-height: 1.5;
+  width: 440px;
+  z-index: 2;
+`;
 export const Title = styled.h2`
   margin: 0 0 10px;
   padding: 0;
@@ -29,7 +41,12 @@ export const Title = styled.h2`
 export const Text = styled.p`
   font-size: 16px;
 `;
-export const ButtonLink = styled(Link)`
+
+export const ExtraText = styled.p`
+  font-size: 16px;
+  color: #8c8c8c;
+`;
+export const ButtonLink = styled(RouterLink)`
   display: block;
   text-align: center;
   background-color: #0080ef;
@@ -75,3 +92,73 @@ export const Button = styled.button`
 //       type === 'normal' ? '#f40612' : '#e0e0e0'};
 //   }
 // `;
+
+export const Input = styled.input<infoProps>`
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: ${({ error }: infoProps) =>
+    error ? '1px solid #e50914' : '1px solid #b3b3b3'};
+  border-radius: 2px;
+  box-sizing: border-box;
+  color: #000;
+  display: block;
+  font-size: 16px;
+  height: 44px;
+  max-width: 500px;
+  padding: 10px 11px;
+  width: 100%;
+
+  &:last-of-type {
+    margin-bottom: 30px;
+  }
+`;
+
+export const Error = styled.div`
+  text-align: left;
+  font-weight: 600;
+  color: #e50914;
+  font-size: 14px;
+  width: -moz-fit-content; /* Firefox */
+  width: -webkit-fit-content; /* Safari */
+  width: fit-content; /* Standard */
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+// export const Info = styled.div`
+//   text-align: left;
+//   font-weight: 600;
+//   color: #4caf50;
+//   font-size: 14px;
+//   width: -moz-fit-content; /* Firefox */
+//   width: -webkit-fit-content; /* Safari */
+//   width: fit-content; /* Standard */
+//   height: 20px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin-bottom: 10px;
+//   line-height: normal;
+// `;
+
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  width: 100%;
+  position: relative;
+`;
+
+export const IconSmall = styled.div`
+  width: 20px;
+  height: 20px;
+  padding-right: 5px;
+`;
+
+export const Link = styled(RouterLink)<LinkProps>`
+  color: ${({ extra }: LinkProps) => (!extra ? '#0071eb' : '#8c8c8c')};
+  text-decoration: underline;
+`;

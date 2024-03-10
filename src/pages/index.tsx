@@ -6,3 +6,4 @@ export { default as SignOut } from './SignOut';
 export { default as Registration } from './Registration';
 export { default as VerifyEmail } from './VerifyEmail';
 export { default as NotFound } from './NotFound';
+export { default as RecoverPw } from './Recover';

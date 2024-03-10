@@ -3,9 +3,10 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { UserProps } from '../types';
 
 export default function useAuthListener() {
-  const authUser = localStorage.getItem('authUser');
+  const authUser = localStorage.getItem('authUser') || null;
+
   const [user, setUser] = useState<UserProps | null>(
-    authUser ? JSON.parse(authUser) : null,
+    authUser !== null && authUser != undefined ? JSON.parse(authUser) : null,
   );
 
   useEffect(() => {

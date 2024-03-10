@@ -69,7 +69,7 @@ export default function SignIn() {
             </Form.Submit>
           </Form.Base>
           <Form.LinkBase>
-            <Form.Link to="#" normal={false} highlight={true}>
+            <Form.Link to={ROUTES.RECOVER_PW} normal={false} highlight={true}>
               {' '}
               Forgot password?
             </Form.Link>

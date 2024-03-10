@@ -6,3 +6,4 @@ export const SIGN_OUT = '/sign_out';
 export const USER = '/user';
 export const REGISTRATION = '/signup/regform';
 export const VERIFY = '/signup/verifyemail';
+export const RECOVER_PW = '/LoginHelp';
